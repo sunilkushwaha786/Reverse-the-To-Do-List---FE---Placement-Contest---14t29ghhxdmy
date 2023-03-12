@@ -1,39 +1,49 @@
 import React, { useState } from 'react'
 import '../styles/App.css';
 
-function ToDo() {
-  return (<tr>
+function ToDo({ todoId, createdAt}) {
+  return (
+  <tr>
     <td>
-      <p>id</p>
+      <p>{todoId}</p>
     </td>
     <td>
-      <input />
+      <input placeholder='Enter your task' />
     </td>
     <td>
-      <p>createdAt</p>
+      <p>{createdAt}</p>
     </td>
-  </tr>)
+  </tr>
+  );
 }
 
 function App() {
   const [todos, setTodos] = useState([{
     id: 'todo1',
     createdAt: '20:30',
-  }, {
+  },
+  {
     id: 'todo2',
     createdAt: '18:00',
-  }
+  },
   ]);
+
+  const ReverseOrder = () =>{
+    setTodos([...todos].reverse());
+  };
 
   return (
     <div id="main">
-      <button>Reverse</button>
+      <button onClick={ReverseOrder}>Reverse</button>
       <table>
         <tbody>
+          {todos.map((todo) => (
+            <ToDo key = {todo.id} todoId = {todo.id} createdAt={todo.createdAt} />
+          ))}
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 
